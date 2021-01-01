@@ -1,9 +1,13 @@
 import React from 'react';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
+import Dashboard from './components/Dashboard';
+
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}></SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <Dashboard />
+    </SafeAreaView>
   );
 }
 
