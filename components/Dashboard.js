@@ -3,9 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class Dashboard extends Component {
     state = {
-        cases: 0,
-        deaths: 0,
-        recovered: 0
+        last_update: "Loading...",
+        cases: "Loading...",
+        deaths: "Loading...",
+        recovered: "Loading...",
+        new_cases_percentage: "Loading...",
+        new_deaths_percentage: "Loading...",
+        new_recovered_percentage: "Loading..."
     }
 
     componentDidMount() {
@@ -13,9 +17,19 @@ export default class Dashboard extends Component {
         .then(r => r.json())
         .then(o => {
             this.setState({
+                last_update: o.last_update.substring(0, 10),
                 cases: o.cases,
                 deaths: o.deaths,
                 recovered: o.recovered
+            });
+        });
+        fetch("https://covid19-api.org/api/diff/us")
+        .then(r => r.json())
+        .then(o => {
+            this.setState({
+                new_cases_percentage: o.new_cases_percentage,
+                new_deaths_percentage: o.new_deaths_percentage,
+                new_recovered_percentage: o.new_recovered_percentage
             });
         });
     }
@@ -23,9 +37,10 @@ export default class Dashboard extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Cases: {this.state.cases}</Text>
-                <Text>Deaths: {this.state.deaths}</Text>
-                <Text>Recovered: {this.state.recovered}</Text>
+                <Text>{this.state.last_update}</Text>
+                <Text>Cases: {this.state.cases} - Increase: {this.state.new_cases_percentage}%</Text>
+                <Text>Deaths: {this.state.deaths} - Increase: {this.state.new_deaths_percentage}%</Text>
+                <Text>Recovered: {this.state.recovered} - Increase: {this.state.new_recovered_percentage}%</Text>
             </View>
         );
     }
