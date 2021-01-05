@@ -18,10 +18,17 @@ export default class SearchBar extends Component {
         });
     }
 
+    submitEditing = () => {
+        this.props.changeCountry(this.state.value);
+        this.setState({
+            value: "Search"
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <TextInput value={this.state.value} onChangeText={e => this.changeText(e)} onFocus={this.clearValue} style={styles.textInput} />
+                <TextInput value={this.state.value} onSubmitEditing={this.submitEditing} onChangeText={e => this.changeText(e)} onFocus={this.clearValue} style={styles.textInput} />
             </View>
         );
     }

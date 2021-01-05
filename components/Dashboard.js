@@ -13,7 +13,20 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount() {
-        fetch("https://covid19-api.org/api/status/us")
+        this.fetchCountryData();
+    }
+
+    fetchCountryData = () => {
+        this.setState({
+            last_update: "Loading...",
+            cases: "Loading...",
+            deaths: "Loading...",
+            recovered: "Loading...",
+            new_cases_percentage: "Loading...",
+            new_deaths_percentage: "Loading...",
+            new_recovered_percentage: "Loading..."
+        });
+        fetch(`https://covid19-api.org/api/status/${this.props.country}`)
         .then(r => r.json())
         .then(o => {
             this.setState({
@@ -23,7 +36,7 @@ export default class Dashboard extends Component {
                 recovered: o.recovered
             });
         });
-        fetch("https://covid19-api.org/api/diff/us")
+        fetch(`https://covid19-api.org/api/diff/${this.props.country}`)
         .then(r => r.json())
         .then(o => {
             this.setState({
@@ -37,6 +50,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>{this.props.country}</Text>
                 <Text>{this.state.last_update}</Text>
                 <Text>Cases: {this.state.cases} - Increase: {this.state.new_cases_percentage}%</Text>
                 <Text>Deaths: {this.state.deaths} - Increase: {this.state.new_deaths_percentage}%</Text>

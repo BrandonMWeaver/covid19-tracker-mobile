@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 import SearchBar from './components/SearchBar';
 import Dashboard from './components/Dashboard';
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <SearchBar />
-      <Dashboard />
-    </SafeAreaView>
-  );
+export default class App extends Component {
+  state = {
+    country: "us"
+  }
+
+  changeCountry = country => {
+    this.setState({
+      country: country
+    });
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <SearchBar changeCountry={this.changeCountry} />
+        <Dashboard key={this.state.country} country={this.state.country} />
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
