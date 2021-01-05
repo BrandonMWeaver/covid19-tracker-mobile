@@ -1,11 +1,13 @@
 import React from 'react';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
+import SearchBar from './components/SearchBar';
 import Dashboard from './components/Dashboard';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
+      <SearchBar />
       <Dashboard />
     </SafeAreaView>
   );
