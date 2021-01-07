@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Statistic from './Statistic';
+
 export default class Dashboard extends Component {
     state = {
-        last_update: "Loading...",
-        cases: "Loading...",
-        deaths: "Loading...",
-        recovered: "Loading...",
-        new_cases_percentage: "Loading...",
-        new_deaths_percentage: "Loading...",
-        new_recovered_percentage: "Loading..."
+        last_update: "...",
+        cases: "...",
+        deaths: "...",
+        recovered: "...",
+        new_cases_percentage: "...",
+        new_deaths_percentage: "...",
+        new_recovered_percentage: "..."
     }
 
     componentDidMount() {
@@ -18,13 +20,13 @@ export default class Dashboard extends Component {
 
     fetchCountryData = () => {
         this.setState({
-            last_update: "Loading...",
-            cases: "Loading...",
-            deaths: "Loading...",
-            recovered: "Loading...",
-            new_cases_percentage: "Loading...",
-            new_deaths_percentage: "Loading...",
-            new_recovered_percentage: "Loading..."
+            last_update: "...",
+            cases: "...",
+            deaths: "...",
+            recovered: "...",
+            new_cases_percentage: "...",
+            new_deaths_percentage: "...",
+            new_recovered_percentage: "..."
         });
         fetch(`https://covid19-api.org/api/status/${this.props.country}`)
         .then(r => r.json())
@@ -50,11 +52,9 @@ export default class Dashboard extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>{this.props.country}</Text>
-                <Text>{this.state.last_update}</Text>
-                <Text>Cases: {this.state.cases} - Increase: {this.state.new_cases_percentage}%</Text>
-                <Text>Deaths: {this.state.deaths} - Increase: {this.state.new_deaths_percentage}%</Text>
-                <Text>Recovered: {this.state.recovered} - Increase: {this.state.new_recovered_percentage}%</Text>
+                <Statistic type={"cases"} statistic={this.state.cases} newPercentage={this.state.new_cases_percentage} />
+                <Statistic type={"deaths"} statistic={this.state.deaths} newPercentage={this.state.new_deaths_percentage} />
+                <Statistic type={"recovered"} statistic={this.state.recovered} newPercentage={this.state.new_recovered_percentage} />
             </View>
         );
     }
@@ -62,8 +62,9 @@ export default class Dashboard extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginRight: 5
     }
 });

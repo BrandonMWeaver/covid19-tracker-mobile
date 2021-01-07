@@ -36,7 +36,7 @@ export default class SearchBar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 10,
+        margin: 5,
         alignItems: "center",
         justifyContent: "center"
     },
