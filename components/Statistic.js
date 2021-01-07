@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import NumberFormat from 'react-number-format';
 
 export default function Statistic(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.type}>{props.type.toUpperCase()}</Text>
-            <Text style={styles.text}>{props.statistic}</Text>
+            <NumberFormat value={props.statistic} renderText={t => <Text style={styles.text}>{t}</Text>} displayType={"text"} thousandSeparator={true} />
             <Text style={styles.text}>Increase - {props.newPercentage}%</Text>
         </View>
     );
