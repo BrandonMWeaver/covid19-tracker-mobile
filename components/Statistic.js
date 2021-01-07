@@ -5,8 +5,8 @@ export default function Statistic(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.type}>{props.type.toUpperCase()}</Text>
-            <Text>{props.statistic}</Text>
-            <Text>Increase - {props.newPercentage}%</Text>
+            <Text style={styles.text}>{props.statistic}</Text>
+            <Text style={styles.text}>Increase - {props.newPercentage}%</Text>
         </View>
     );
 }
@@ -17,9 +17,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginLeft: 5,
-        borderWidth: 1
+        padding: 5,
+        backgroundColor: "#cdcdff",
+        borderRadius: 10
     },
     type: {
-        fontSize: 20
+        color: "#ff0"
+    },
+    text: {
+        color: "#fff"
     }
 });

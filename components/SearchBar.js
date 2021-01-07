@@ -38,12 +38,13 @@ const styles = StyleSheet.create({
     container: {
         margin: 5,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: "#cdcdff",
+        borderRadius: 10
     },
     textInput: {
         padding: 5,
         alignSelf: "stretch",
-        textAlign: "center",
-        borderWidth: 1
+        textAlign: "center"
     }
 });
